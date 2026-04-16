@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            margin: 10px auto;
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+        }
+        a {
+            color: red;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Task Manager</h1>
+
+    <form method="POST">
+        <input type="text" name="task" placeholder="Enter task">
+        <input type="date" name="deadline">
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+        
+     {% for i, t in tasks %}
+         <li>
+             {% if t.done %}
+                <s>{{ t.text }}</s>
+             {% else %}
+                {{ t.text }}
+             {% endif %}
+
+             <br>
+             <small>📅{{ t.deadline }}</small>
+            
+             <a href="/toggle/{{ i }}">✔</a>
+             <a href="/delete/{{ i }}">❌</a>
+         </li>
+     {% endfor %}
+    </ul>
+</body>
+</html>
